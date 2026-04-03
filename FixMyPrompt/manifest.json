@@ -1,11 +1,10 @@
 {
   "manifest_version": 3,
   "name": "FixMyPrompt",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "description": "Improve AI prompts inline with one click. Better outcomes, less overthinking.",
   "permissions": [
     "activeTab",
-    "scripting",
     "storage"
   ],
   "host_permissions": [

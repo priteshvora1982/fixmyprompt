@@ -86,7 +86,6 @@ Chrome requires you to declare data usage. Answer as follows:
 
 **Permissions justifications** (use content from `permission-justifications.md`):
 - [ ] `activeTab` — To read and modify the prompt text in the active ChatGPT or Claude tab
-- [ ] `scripting` — To inject the content script that displays the improvement balloon
 - [ ] `storage` — To remember whether the balloon has been shown in the current session
 - [ ] `https://chatgpt.com/*` — Extension only works on ChatGPT
 - [ ] `https://claude.ai/*` — Extension only works on Claude

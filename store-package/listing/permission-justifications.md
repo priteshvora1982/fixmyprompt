@@ -20,21 +20,6 @@ FixMyPrompt needs to read the content of the active tab to detect which AI platf
 
 ---
 
-### Permission: `scripting`
-
-**Why it's needed:**
-Required to inject the content script into supported AI platform pages (ChatGPT and Claude). This is how the extension places its UI elements (button, balloon, modal) into the page.
-
-**Specific use:**
-- Injects `content-script.js` into `chatgpt.com` and `claude.ai` only
-- Injects `extension.css` for styling the UI components
-
-**What it does NOT do:**
-- Does not inject scripts into any other websites
-- Does not modify page content beyond adding the FixMyPrompt UI overlay
-
----
-
 ### Permission: `storage`
 
 **Why it's needed:**
@@ -71,6 +56,7 @@ The extension only operates on these three domains — the two URLs for ChatGPT 
 ### No other permissions are requested.
 
 FixMyPrompt deliberately avoids requesting permissions it does not need:
+- ❌ No `scripting` permission (content script is injected declaratively via manifest `content_scripts`, not programmatically)
 - ❌ No `tabs` permission (does not enumerate or access other tabs)
 - ❌ No `history` permission
 - ❌ No `cookies` permission
