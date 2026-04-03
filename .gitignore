@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archives
+*.zip
+*.tar.gz
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build artifacts (keep FixMyPrompt/ compiled folder, ignore temp files)
+*.bak
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo

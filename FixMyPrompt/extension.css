@@ -1,0 +1,1160 @@
+/**
+ * FixMyPrompt – Extension Styles
+ */
+
+/* Base styles */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
+  --warning-color: #f59e0b;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --bg-light: #f9fafb;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+/* Button styles */
+#fixmyprompt-button button {
+  padding: 8px 12px;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+#fixmyprompt-button button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#fixmyprompt-button button:active {
+  transform: scale(0.98);
+}
+
+/* Modal overlay */
+#fixmyprompt-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+/* Modal content */
+#fixmyprompt-modal > div {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Modal header */
+#fixmyprompt-modal .modal-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#fixmyprompt-modal .modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#fixmyprompt-modal .modal-header button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+#fixmyprompt-modal .modal-header button:hover {
+  color: var(--text-primary);
+}
+
+/* Modal body */
+#fixmyprompt-modal .modal-body {
+  padding: 20px;
+}
+
+/* Score section */
+.fixmyprompt-score-section {
+  background: var(--bg-light);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.fixmyprompt-score-item {
+  text-align: center;
+}
+
+.fixmyprompt-score-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.fixmyprompt-score-value {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.fixmyprompt-score-before {
+  color: var(--error-color);
+}
+
+.fixmyprompt-score-after {
+  color: var(--success-color);
+}
+
+/* Text sections */
+.fixmyprompt-section {
+  margin-bottom: 16px;
+}
+
+.fixmyprompt-section-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.fixmyprompt-section-content {
+  background: var(--bg-light);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.fixmyprompt-section-content textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  border: 1px solid var(--success-color);
+  background: #f0fdf4;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  box-sizing: border-box;
+}
+
+/* Changes section */
+.fixmyprompt-changes-section {
+  margin-bottom: 16px;
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid var(--info-color);
+}
+
+.fixmyprompt-changes-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.fixmyprompt-changes-list {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.fixmyprompt-changes-list li {
+  font-size: 13px;
+  color: #1e40af;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.fixmyprompt-changes-list li:before {
+  content: "✓ ";
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+/* Modal footer */
+#fixmyprompt-modal .modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.fixmyprompt-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.fixmyprompt-btn-secondary {
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.fixmyprompt-btn-secondary:hover {
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+
+.fixmyprompt-btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.fixmyprompt-btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Toast notifications */
+.fixmyprompt-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  color: white;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 999999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fixmyprompt-toast-error {
+  background: var(--error-color);
+}
+
+.fixmyprompt-toast-success {
+  background: var(--success-color);
+}
+
+.fixmyprompt-toast-info {
+  background: var(--info-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #fixmyprompt-modal > div {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  #fixmyprompt-modal .modal-body {
+    padding: 16px;
+  }
+
+  #fixmyprompt-modal .modal-footer {
+    flex-direction: column;
+  }
+
+  .fixmyprompt-btn {
+    width: 100%;
+  }
+}
+
+
+/* ===== AutoDetectBalloon Styles (Modern & Sleek) ===== */
+
+.fixmyprompt-balloon-wrapper {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.25), 0 0 1px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1f2937;
+    animation: fixmyprompt-slide-in 0.3s ease-out;
+    font-weight: 500;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes fixmyprompt-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fixmyprompt-balloon-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fixmyprompt-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 4px;
+}
+
+.fixmyprompt-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    font-weight: 900;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.fixmyprompt-score-red {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.fixmyprompt-score-yellow {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.fixmyprompt-score-green {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.fixmyprompt-score-value {
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 900;
+    color: white !important; /* override any conflicting definitions */
+}
+
+.fixmyprompt-score-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: white !important; /* override conflicting definitions from score-row section */
+    opacity: 0.95;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.fixmyprompt-meta {
+    flex: 1;
+}
+
+.fixmyprompt-domain {
+    font-size: 10px;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 800;
+}
+
+.fixmyprompt-status {
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 4px;
+    color: #1f2937;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.fixmyprompt-section {
+    padding: 8px 0;
+    border-top: 1px solid #e5e7eb;
+}
+
+.fixmyprompt-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fixmyprompt-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fixmyprompt-list li {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 8px;
+    padding-left: 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.fixmyprompt-analyzing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.fixmyprompt-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: fixmyprompt-spin 0.8s linear infinite;
+}
+
+@keyframes fixmyprompt-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.fixmyprompt-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.fixmyprompt-error-icon {
+    font-size: 24px;
+}
+
+.fixmyprompt-error-message {
+    font-size: 12px;
+    color: #666;
+}
+
+.fixmyprompt-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.fixmyprompt-btn-improve,
+.fixmyprompt-btn-dismiss {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fixmyprompt-btn-improve {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.fixmyprompt-btn-improve:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.fixmyprompt-btn-improve:active {
+    transform: translateY(0);
+}
+
+.fixmyprompt-btn-dismiss {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    font-weight: 700;
+}
+
+.fixmyprompt-btn-dismiss:hover {
+    background: #f3f4f6;
+    color: #764ba2;
+    border-color: #764ba2;
+}
+
+
+/* ===== Balloon Question Flow Styles ===== */
+
+/* Wider balloon for question mode */
+.fixmyprompt-balloon-wrapper {
+    width: 380px;
+}
+
+/* Results: hint text under status */
+.fixmyprompt-hint {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+/* Question mode container */
+.fmp-question-mode {
+    gap: 14px;
+}
+
+/* Progress dots row */
+.fmp-q-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.fmp-progress-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.fmp-progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    transition: background 0.2s ease;
+}
+
+.fmp-dot-done {
+    background: #667eea;
+}
+
+.fmp-dot-active {
+    background: #764ba2;
+    width: 10px;
+    height: 10px;
+}
+
+.fmp-q-counter {
+    font-size: 11px;
+    color: #9ca3af;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Question text */
+.fmp-question-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.4;
+    padding: 4px 0;
+}
+
+/* Chip options */
+.fmp-chip-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fmp-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 0;
+}
+
+.fmp-chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1.5px solid #d1d5db;
+    background: white;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.fmp-chip:hover {
+    border-color: #667eea;
+    color: #667eea;
+    background: #f0f0ff;
+}
+
+.fmp-chip-selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.35);
+}
+
+.fmp-chip-selected:hover {
+    background: linear-gradient(135deg, #5a6fd6 0%, #6a3d96 100%);
+    color: white;
+}
+
+/* Free text input */
+.fmp-freetext-wrap {
+    margin-top: 2px;
+}
+
+.fmp-freetext-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    font-size: 13px;
+    color: #374151;
+    background: #f9fafb;
+    outline: none;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.fmp-freetext-input:focus {
+    border-color: #667eea;
+    background: white;
+}
+
+.fmp-freetext-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Question action buttons */
+.fmp-q-actions {
+    margin-top: 4px;
+}
+
+/* Improved prompt mode */
+.fmp-improved-mode {
+    gap: 12px;
+}
+
+.fmp-improved-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fmp-improved-badge {
+    font-size: 12px;
+    font-weight: 800;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.fmp-btn-back {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.15s ease;
+}
+
+.fmp-btn-back:hover {
+    color: #374151;
+}
+
+/* Editable improved prompt text */
+.fmp-improved-text {
+    background: #f0f0ff;
+    border: 1.5px solid #c4b5fd;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #1f2937;
+    max-height: 180px;
+    overflow-y: auto;
+    outline: none;
+    cursor: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.fmp-improved-text:focus {
+    border-color: #667eea;
+    background: white;
+}
+
+.fmp-improved-actions {
+    margin-top: 4px;
+}
+
+.fmp-edit-hint {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: center;
+    font-style: italic;
+    margin-top: -4px;
+}
+
+/* Next button disabled state */
+.fmp-btn-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Balloon Results State (v0.1.21)
+   ───────────────────────────────────────────────────────────── */
+
+.fixmyprompt-balloon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.fixmyprompt-domain-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #667eea;
+    background: #f0f0ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 20px;
+    padding: 3px 10px;
+}
+
+.fixmyprompt-balloon-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: color 0.15s ease;
+}
+
+.fixmyprompt-balloon-close:hover {
+    color: #374151;
+    background: #f3f4f6;
+}
+
+.fixmyprompt-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #f8f9ff;
+    border-radius: 10px;
+    border: 1px solid #e0e7ff;
+}
+
+/* Score row label/value — scoped to .fixmyprompt-score-row to avoid conflicting with balloon badge */
+.fixmyprompt-score-row .fixmyprompt-score-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fixmyprompt-score-row .fixmyprompt-score-value {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fixmyprompt-score-row .fixmyprompt-score-value.fixmyprompt-score-green { color: #16a34a !important; }
+.fixmyprompt-score-row .fixmyprompt-score-value.fixmyprompt-score-yellow { color: #d97706 !important; }
+.fixmyprompt-score-row .fixmyprompt-score-value.fixmyprompt-score-red { color: #dc2626 !important; }
+
+.fixmyprompt-gaps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fixmyprompt-gap-item {
+    font-size: 12px;
+    color: #6b7280;
+    padding: 6px 10px;
+    background: #fef9c3;
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.4;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   BALLOON v0.1.25 — Modern Results Screen
+   ───────────────────────────────────────────────────────────── */
+
+.fmp-results-modern {
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fmp-results-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fmp-score-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+.fmp-score-num {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  color: white;
+}
+
+.fmp-score-denom {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.85;
+  color: white;
+}
+
+.fmp-results-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.fmp-domain-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6366f1;
+  background: #ede9fe;
+  border-radius: 4px;
+  padding: 2px 7px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.fmp-results-meta .fmp-score-label {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-top: 1px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fmp-score-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.fmp-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 15px;
+  padding: 4px 6px;
+  line-height: 1;
+  flex-shrink: 0;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  align-self: flex-start;
+}
+.fmp-close-btn:hover { color: #475569; background: #f1f5f9; }
+
+.fmp-gaps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fmp-gap-card {
+  background: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.fmp-results-actions {
+  margin-top: 2px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fmp-dismiss-btn {
+  padding: 12px 14px;
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.fmp-dismiss-btn:hover { background: #f8fafc; color: #64748b; border-color: #cbd5e1; }
+
+.fmp-improve-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+  transition: opacity 0.15s, transform 0.1s;
+}
+.fmp-improve-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────────────────────────
+   BALLOON v0.1.25 — Question Footer (Back / Skip / Next)
+   ───────────────────────────────────────────────────────────── */
+
+.fmp-q-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.fmp-q-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Override old .fmp-btn-back from improved-mode */
+.fmp-q-footer .fmp-btn-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 4px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.fmp-q-footer .fmp-btn-back:hover { color: #334155; }
+
+.fmp-btn-skip {
+  background: none;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+.fmp-btn-skip:hover { border-color: #94a3b8; color: #334155; }
+
+.fmp-btn-next {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+.fmp-btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.fmp-btn-next:not(:disabled):hover { opacity: 0.88; }
+
+
+/* ─────────────────────────────────────────────────────────────────────
+   Checkmark Indicator for High-Scoring Prompts (v0.1.29)
+   ───────────────────────────────────────────────────────────────────── */
+.fixmyprompt-checkmark-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.fixmyprompt-checkmark-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  animation: fixmyprompt-checkmark-pulse 0.6s ease-out;
+}
+
+@keyframes fixmyprompt-checkmark-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fixmyprompt-checkmark-indicator span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #10b981;
+  letter-spacing: 0.3px;
+}

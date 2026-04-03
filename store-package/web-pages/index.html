@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixMyPrompt — Better AI Prompts, Better Results</title>
+  <meta name="description" content="FixMyPrompt automatically rewrites your ChatGPT and Claude prompts to be clearer, smarter, and more detailed. Get better AI responses on your first try." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #667eea;
+      --purple-dark: #764ba2;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --text: #111827;
+      --text-mid: #374151;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f9fafb;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 700; color: var(--text);
+    }
+    .nav-logo span {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 14px; color: var(--text-mid); font-weight: 500; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white !important; padding: 10px 20px;
+      border-radius: 8px; font-weight: 600; font-size: 14px;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.9; text-decoration: none !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #e0f2fe 100%);
+      padding: 96px 24px 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: white; border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 500; color: var(--text-mid);
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 800px; margin: 0 auto 20px;
+    }
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-light); max-width: 560px;
+      margin: 0 auto 40px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white; padding: 16px 32px; border-radius: 12px;
+      font-size: 16px; font-weight: 700;
+      box-shadow: 0 8px 24px rgba(102,126,234,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(102,126,234,0.5); text-decoration: none; color: white; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--text-mid);
+      padding: 16px 32px; border-radius: 12px;
+      font-size: 16px; font-weight: 600;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s;
+    }
+    .btn-secondary:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); text-decoration: none; color: var(--text); }
+
+    .hero-platforms {
+      margin-top: 40px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      font-size: 13px; color: var(--text-light);
+    }
+    .platform-pill {
+      background: white; border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 100px;
+      font-weight: 500; font-size: 13px; color: var(--text-mid);
+    }
+
+    /* PROBLEM SECTION */
+    .section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800; line-height: 1.2; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 18px; color: var(--text-light);
+      max-width: 600px; line-height: 1.7; margin-bottom: 48px;
+    }
+
+    .problem-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .problem-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .problem-card .icon {
+      font-size: 32px; margin-bottom: 16px;
+    }
+    .problem-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .problem-card p { font-size: 15px; color: var(--text-light); line-height: 1.7; }
+
+    /* HOW IT WORKS */
+    .how-section { background: var(--bg); padding: 80px 24px; }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .how-inner .section-label, .how-inner h2, .how-inner .section-sub { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .step {
+      background: white; border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    /* DOMAINS */
+    .domains-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px; margin-top: 48px;
+    }
+    .domain-card {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 14px;
+      background: white;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .domain-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .domain-icon { font-size: 28px; flex-shrink: 0; }
+    .domain-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .domain-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+    /* PRIVACY STRIP */
+    .privacy-strip {
+      background: linear-gradient(135deg, var(--green), #059669);
+      padding: 48px 24px; text-align: center; color: white;
+    }
+    .privacy-strip h2 { color: white; margin-bottom: 12px; }
+    .privacy-strip p { color: rgba(255,255,255,0.85); font-size: 17px; max-width: 560px; margin: 0 auto 32px; }
+    .privacy-pills {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .privacy-pill {
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
+      color: white; padding: 8px 18px; border-radius: 100px;
+      font-size: 14px; font-weight: 500;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 96px 24px; text-align: center;
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+    }
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p { font-size: 18px; color: var(--text-light); max-width: 500px; margin: 0 auto 40px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.6);
+      padding: 48px 24px; text-align: center;
+    }
+    .footer-logo { font-size: 20px; font-weight: 800; color: white; margin-bottom: 8px; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin: 20px 0 16px; }
+    .footer-links a { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .footer-links a:hover { color: white; }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">✨ <span>FixMyPrompt</span></div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#domains">Domains</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </div>
+  <a href="https://chrome.google.com/webstore" class="nav-cta nav-links">Add to Chrome — Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="dot"></div>
+    Free Chrome Extension — No Account Required
+  </div>
+  <h1>Stop Getting<br><span class="gradient">Mediocre AI Responses</span></h1>
+  <p class="hero-sub">
+    FixMyPrompt automatically improves your prompts on ChatGPT and Claude before you send them. Better prompts. Better answers. First try.
+  </p>
+  <div class="hero-actions">
+    <a href="https://chrome.google.com/webstore" class="btn-primary">
+      ✨ Add to Chrome — It's Free
+    </a>
+    <a href="#how" class="btn-secondary">See how it works →</a>
+  </div>
+  <div class="hero-platforms">
+    Works on <span class="platform-pill">ChatGPT</span> and <span class="platform-pill">Claude</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="section">
+  <p class="section-label">The Problem</p>
+  <h2>Most people get poor AI results.<br>Not because AI is bad — but because prompts are vague.</h2>
+  <p class="section-sub">Two costly problems, one root cause: most people don't know how to write a prompt that gets results.</p>
+
+  <div class="problem-cards">
+    <div class="problem-card">
+      <div class="icon">⏳</div>
+      <h3>The Time Sink</h3>
+      <p>A 5-minute task turns into a 2-hour loop of re-prompting, tweaking, and clarifying. You go in circles because the AI didn't understand your initial vague request.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⚠️</div>
+      <h3>The Hidden Quality Risk</h3>
+      <p>A vague prompt gets a generic — sometimes subtly wrong — answer. You might not even notice and act on it: a business plan with weak assumptions, a marketing email with the wrong tone.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🧠</div>
+      <h3>Prompt Engineering is Hard</h3>
+      <p>Writing expert-level prompts is a skill that takes months to learn. Most people shouldn't need to become prompt engineers just to get useful answers from AI.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section" id="how">
+  <div class="how-inner">
+    <p class="section-label">How it works</p>
+    <h2>From vague to powerful in 60 seconds</h2>
+    <p class="section-sub">FixMyPrompt works silently in the background. It only speaks up when your prompt needs help.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>You type your prompt</h3>
+        <p>Write whatever comes naturally. Don't overthink it — that's what FixMyPrompt is for.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We detect what's missing</h3>
+        <p>After 2.5 seconds of inactivity, we analyse your prompt and score it. If it needs work, a balloon appears.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Answer 3 quick questions</h3>
+        <p>Tap chips to answer. No typing needed. 30 seconds total. Questions are specific to YOUR prompt, not generic.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Your prompt is rewritten</h3>
+        <p>We send your improved prompt back to the input box — structured, specific, and ready to deliver a great response.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Send & get great results</h3>
+        <p>Hit send. Get the high-quality AI response you needed from the very first message.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOMAINS -->
+<div class="section" id="domains">
+  <p class="section-label">8 Domains Covered</p>
+  <h2>Smart enough to know what your prompt is about</h2>
+  <p class="section-sub">FixMyPrompt classifies your prompt and generates questions tailored to that domain — not generic filler.</p>
+
+  <div class="domains-grid">
+    <div class="domain-card">
+      <div class="domain-icon">💼</div>
+      <div><h3>Business</h3><p>Strategy, marketing, sales, pitches, competitive analysis, OKRs</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">✍️</div>
+      <div><h3>Creative Writing</h3><p>Blog posts, landing page copy, ad copy, emails, scripts, stories</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🎨</div>
+      <div><h3>Creative Media</h3><p>AI art, image prompts, video reels, logos, presentations, design assets</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">💻</div>
+      <div><h3>Technical</h3><p>Code, debugging, architecture, APIs, system design, DevOps</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">💰</div>
+      <div><h3>Finance</h3><p>Investing, wealth building, financial planning, crypto, retirement</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🎓</div>
+      <div><h3>Academic</h3><p>Research papers, essays, literature reviews, thesis, case studies</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">👔</div>
+      <div><h3>Career</h3><p>Resumes, cover letters, interview prep, LinkedIn, salary negotiation</p></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🙋</div>
+      <div><h3>Personal</h3><p>Wellness, goals, habits, relationships, self-improvement, productivity</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY STRIP -->
+<div class="privacy-strip">
+  <h2>Privacy first. Always.</h2>
+  <p>Your prompts are yours. We never store, log, or share any of your data. Everything happens in real-time and is immediately discarded.</p>
+  <div class="privacy-pills">
+    <div class="privacy-pill">✅ No account required</div>
+    <div class="privacy-pill">✅ No prompts stored</div>
+    <div class="privacy-pill">✅ No tracking</div>
+    <div class="privacy-pill">✅ No ads</div>
+    <div class="privacy-pill">✅ Free forever</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p class="section-label">Get Started</p>
+  <h2>Better AI results start with better prompts</h2>
+  <p>Free Chrome extension. No account. Works on ChatGPT and Claude.</p>
+  <a href="https://chrome.google.com/webstore" class="btn-primary">
+    ✨ Add FixMyPrompt to Chrome
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✨ FixMyPrompt</div>
+  <p>Better AI prompts. Better results.</p>
+  <div class="footer-links">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <p class="footer-note">FixMyPrompt is independent and not affiliated with OpenAI or Anthropic.</p>
+</footer>
+
+</body>
+</html>

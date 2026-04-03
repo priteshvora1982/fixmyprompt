@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — FixMyPrompt</title>
+  <meta name="description" content="FixMyPrompt support. Get help installing the extension, troubleshooting issues, and understanding how it works." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #667eea; --purple-dark: #764ba2; --green: #10b981;
+      --text: #111827; --text-mid: #374151; --text-light: #6b7280;
+      --border: #e5e7eb; --bg: #f9fafb; --white: #ffffff;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text); background: var(--white); line-height: 1.7;
+    }
+    a { color: var(--purple); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px; display: flex; align-items: center;
+      justify-content: space-between; height: 64px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 700; text-decoration: none; color: var(--text); }
+    .nav-logo span {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      padding: 64px 24px 48px; text-align: center;
+    }
+    .hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .hero p { font-size: 17px; color: var(--text-light); max-width: 500px; margin: 0 auto; }
+
+    .content { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
+
+    /* QUICK CARDS */
+    .quick-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-bottom: 64px;
+    }
+    .quick-card {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; text-align: center; background: var(--bg);
+      transition: box-shadow 0.2s;
+    }
+    .quick-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .quick-card .icon { font-size: 32px; margin-bottom: 12px; }
+    .quick-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .quick-card p { font-size: 13px; color: var(--text-light); }
+
+    /* INSTALL STEPS */
+    .install-steps {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px; margin-bottom: 48px;
+    }
+    .install-steps h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+    .install-step {
+      display: flex; gap: 16px; margin-bottom: 20px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--border);
+    }
+    .install-step:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .step-badge {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px;
+    }
+    .install-step h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .install-step p { font-size: 14px; color: var(--text-light); margin: 0; }
+
+    /* FAQ */
+    h2.section-title {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .faq { margin-bottom: 48px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 12px; overflow: hidden;
+    }
+    .faq-q {
+      padding: 20px 24px;
+      font-weight: 600; font-size: 15px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--bg);
+    }
+    .faq-q:hover { background: #f0f0f0; }
+    .faq-a {
+      padding: 0 24px 20px;
+      font-size: 15px; color: var(--text-mid); line-height: 1.7;
+    }
+
+    /* KNOWN ISSUES */
+    .issues-table {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 48px; font-size: 14px;
+    }
+    .issues-table th {
+      text-align: left; padding: 12px 16px;
+      background: var(--bg); border-bottom: 2px solid var(--border);
+      font-weight: 700; color: var(--text-mid);
+    }
+    .issues-table td {
+      padding: 14px 16px; border-bottom: 1px solid var(--border);
+      color: var(--text-mid); vertical-align: top;
+    }
+    .issues-table tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block; padding: 2px 10px; border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+    }
+    .badge-known { background: #fef3c7; color: #92400e; }
+    .badge-fixed { background: #d1fae5; color: #065f46; }
+
+    /* CONTACT */
+    .contact-section {
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      border-radius: 16px; padding: 48px 32px; text-align: center;
+    }
+    .contact-section h2 { font-size: 26px; margin-bottom: 12px; }
+    .contact-section p { color: var(--text-light); font-size: 16px; max-width: 440px; margin: 0 auto 24px; }
+    .contact-email {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white; padding: 14px 32px; border-radius: 10px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+    }
+
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.6);
+      padding: 40px 24px; text-align: center;
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin: 16px 0; }
+    .footer-links a { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.35); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">✨ <span>FixMyPrompt</span></a>
+  <a href="index.html" style="font-size:14px; color:var(--text-light);">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <h1>Support</h1>
+  <p>Installation help, troubleshooting, FAQs, and how to contact us.</p>
+</div>
+
+<div class="content">
+
+  <!-- QUICK LINKS -->
+  <div class="quick-cards">
+    <div class="quick-card">
+      <div class="icon">📦</div>
+      <h3>Installation</h3>
+      <p>How to install and load the extension in Chrome</p>
+    </div>
+    <div class="quick-card">
+      <div class="icon">🔧</div>
+      <h3>Troubleshooting</h3>
+      <p>Balloon not appearing? Button missing? Fix it here.</p>
+    </div>
+    <div class="quick-card">
+      <div class="icon">❓</div>
+      <h3>FAQ</h3>
+      <p>Common questions about how FixMyPrompt works</p>
+    </div>
+    <div class="quick-card">
+      <div class="icon">✉️</div>
+      <h3>Contact Us</h3>
+      <p>Reach out and we'll get back to you quickly</p>
+    </div>
+  </div>
+
+  <!-- INSTALLATION -->
+  <h2 class="section-title">How to Install</h2>
+  <div class="install-steps">
+    <div class="install-step">
+      <div class="step-badge">1</div>
+      <div>
+        <h3>Add from Chrome Web Store</h3>
+        <p>Click "Add to Chrome" on the Chrome Web Store listing. Confirm by clicking "Add extension" in the popup.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-badge">2</div>
+      <div>
+        <h3>Open ChatGPT or Claude</h3>
+        <p>Navigate to <strong>chatgpt.com</strong> or <strong>claude.ai</strong>. The extension activates automatically on these pages.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-badge">3</div>
+      <div>
+        <h3>Type a prompt</h3>
+        <p>Start typing in the chat input box. After 2–3 seconds of inactivity, FixMyPrompt will appear if your prompt can be improved.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-badge">4</div>
+      <div>
+        <h3>Follow the prompts</h3>
+        <p>A small balloon appears with your prompt's score and an "Improve with Questions" button. Tap chips to answer 3 quick questions, then accept the improved prompt.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq">
+
+    <div class="faq-item">
+      <div class="faq-q">Why isn't the balloon appearing?</div>
+      <div class="faq-a">
+        <p>A few reasons this can happen:</p>
+        <ul style="padding-left:20px; margin-top:8px;">
+          <li><strong>Your prompt already scores well</strong> — if the extension detects a well-structured prompt, it shows a ✓ checkmark instead of the improvement balloon.</li>
+          <li><strong>The balloon already appeared</strong> in this conversation — it only shows once per new conversation to avoid being disruptive.</li>
+          <li><strong>Page loaded before the extension</strong> — try refreshing the page and typing again.</li>
+          <li><strong>The prompt is too short</strong> — prompts under ~10 characters are ignored.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why does the balloon only appear on my first message?</div>
+      <div class="faq-a">
+        This is intentional. FixMyPrompt focuses on improving your initial prompt — the one that sets the direction of the entire conversation. Once you're in a back-and-forth with the AI, the extension steps back to avoid interrupting your flow. Use the ✨ Improve button (top-right of the input box) at any time for manual improvement.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does FixMyPrompt work on Claude?</div>
+      <div class="faq-a">
+        Yes! FixMyPrompt works on both ChatGPT (chatgpt.com) and Claude (claude.ai). If you're having trouble on Claude specifically, try refreshing the page — Claude's UI sometimes loads in a way that requires a refresh for the extension to attach properly.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is my data safe? Do you store my prompts?</div>
+      <div class="faq-a">
+        No. Your prompts are processed in real-time to generate improvements and are immediately discarded. We never write your prompts to a database or log file. No account is required. See our <a href="privacy.html">Privacy Policy</a> for the full details.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The questions feel generic — not specific to my prompt.</div>
+      <div class="faq-a">
+        This usually happens when the original prompt is extremely vague (e.g. just "write an email"). The more context you give in your initial prompt, the more specific the questions will be. If you see generic questions, try adding a few more words to your prompt before triggering the balloon.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The domain badge shows the wrong category.</div>
+      <div class="faq-a">
+        Domain detection is based on keyword and phrase analysis and can occasionally misclassify prompts that sit between two categories (e.g. a marketing email could be "Business" or "Creative Writing"). The questions are still useful even if the domain is slightly off — they're generated from your actual prompt text, not just the domain label. We're actively improving accuracy.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The ✨ Improve button is greyed out / disabled.</div>
+      <div class="faq-a">
+        The manual Improve button is currently disabled for follow-up messages in an existing conversation (context-aware improvements for follow-ups are coming in the next version). It is available on new conversations. The balloon flow (automatic detection) handles the first prompt.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does it work on Gemini / Perplexity / other AI tools?</div>
+      <div class="faq-a">
+        Not yet. FixMyPrompt currently supports ChatGPT and Claude. Support for Gemini is on our roadmap. If you'd like to see a specific platform supported, let us know via the contact form below.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is FixMyPrompt free?</div>
+      <div class="faq-a">
+        Yes, completely free. No account required, no credit card, no trial period.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- KNOWN ISSUES -->
+  <h2 class="section-title">Known Issues & Limitations</h2>
+  <table class="issues-table">
+    <thead>
+      <tr>
+        <th>Issue</th>
+        <th>Status</th>
+        <th>Workaround</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Balloon only appears on first message in a conversation</td>
+        <td><span class="badge badge-known">By design</span></td>
+        <td>Use the ✨ Improve button for subsequent messages</td>
+      </tr>
+      <tr>
+        <td>Domain occasionally misclassified for ambiguous prompts</td>
+        <td><span class="badge badge-known">Known</span></td>
+        <td>Questions are still contextual — usefulness is mostly unaffected</td>
+      </tr>
+      <tr>
+        <td>Claude sometimes requires a page refresh to detect extension</td>
+        <td><span class="badge badge-known">Known</span></td>
+        <td>Refresh the page once after installation</td>
+      </tr>
+      <tr>
+        <td>Manual Improve button disabled on follow-up messages</td>
+        <td><span class="badge badge-known">Planned v0.2</span></td>
+        <td>Start a new conversation to use the button</td>
+      </tr>
+      <tr>
+        <td>No Gemini support</td>
+        <td><span class="badge badge-known">Roadmap</span></td>
+        <td>Use on ChatGPT or Claude for now</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <h2>Still need help?</h2>
+    <p>Send us a message and we'll get back to you as soon as we can. Please include the platform you're using (ChatGPT or Claude) and a description of the issue.</p>
+    <a href="mailto:support@fixmyprompt.com" class="contact-email">✉️ Email Support</a>
+  </div>
+
+</div>
+
+<footer>
+  <div style="font-size:18px; font-weight:800; color:white; margin-bottom:8px;">✨ FixMyPrompt</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="support.html">Support</a>
+  </div>
+  <p class="footer-note">FixMyPrompt is independent and not affiliated with OpenAI or Anthropic.</p>
+</footer>
+
+</body>
+</html>
