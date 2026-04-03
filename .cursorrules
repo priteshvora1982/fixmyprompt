@@ -1,0 +1,28 @@
+# Cursor Rules — FixMyPrompt
+
+## Project
+Chrome Extension (Manifest V3, vanilla JS). No frameworks. Bundled with esbuild.
+Works on chatgpt.com and claude.ai.
+
+## Stack
+- Vanilla JS (ES modules in src/, IIFE output after build)
+- esbuild for bundling
+- Node.js + Express backend on Railway
+- OpenAI GPT-4 Turbo for prompt rewriting
+
+## Critical rules
+- Never hardcode `platform: 'chatgpt'` — use `_detectPlatform()` from auto-detect-balloon.js
+- Backend returns scores 0–100. UI shows 0–10. Always divide by 10 when displaying.
+- `balloonShownInCurrentConversation` in button.js must only reset on a genuine new conversation (different URL UUID), not on every URL change.
+- No npm packages unless absolutely necessary — check bundle size impact first.
+- All console.log must use `[FixMyPrompt]` prefix.
+- Do not add comments or docstrings to code that isn't being changed.
+
+## Key files
+- `src/content/button.js` — balloon trigger, conversation detection, ✨ button
+- `src/content/auto-detect-balloon.js` — balloon UI (6 states)
+- `src/shared/backend-api.js` — Railway API client + score normalization
+- `src/shared/domain-detector.js` — classifies prompts into 8 domains
+
+## Build output
+Always goes to `FixMyPrompt/` directory. After any src/ change, rebuild before testing.
