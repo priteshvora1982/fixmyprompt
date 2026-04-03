@@ -42,8 +42,8 @@ Use the content from `store-package/listing/store-description.md`
 - [ ] **Language:** English
 
 **URLs (optional but recommended):**
-- [ ] **Homepage URL:** https://fixmyprompt.com (once your domain is live)
-- [ ] **Support URL:** https://fixmyprompt.com/support.html
+- [ ] **Homepage URL:** https://priteshvora1982.github.io/fixmyprompt/
+- [ ] **Support URL:** https://priteshvora1982.github.io/fixmyprompt/support.html
 
 ---
 
@@ -79,7 +79,7 @@ Chrome requires you to declare data usage. Answer as follows:
 - [ ] **User activity** → "Prompt text is sent to backend for improvement" → Purpose: "Core extension functionality" → Not sold, not used for ads, not used to determine creditworthiness
 
 **Single purpose description:**
-- [ ] Enter: `Improve AI prompts typed on ChatGPT and Claude by analyzing them and generating better versions.`
+- [ ] Enter: `FixMyPrompt analyzes prompts typed on ChatGPT and Claude, identifies what's missing, and rewrites them to be clearer and more effective — helping users get better AI responses.`
 
 **Remote code:**
 - [ ] Select: **"No"** — the extension does not execute remotely hosted code

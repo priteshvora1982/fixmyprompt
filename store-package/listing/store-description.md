@@ -87,6 +87,13 @@ FixMyPrompt understands 8 domains and tailors its improvements accordingly:
 
 ---
 
+## Single Purpose Statement
+*(Required field in Chrome Web Store — paste this exactly)*
+
+> FixMyPrompt analyzes prompts typed on ChatGPT and Claude, identifies what's missing, and rewrites them to be clearer and more effective — helping users get better AI responses.
+
+---
+
 ## Category
 **Productivity**
 
@@ -94,10 +101,10 @@ FixMyPrompt understands 8 domains and tailors its improvements accordingly:
 English (United States)
 
 ## Website / Homepage
-https://fixmyprompt.com
+https://priteshvora1982.github.io/fixmyprompt/
 
 ## Support URL
-https://fixmyprompt.com/support
+https://priteshvora1982.github.io/fixmyprompt/support.html
 
 ## Privacy Policy URL
-https://fixmyprompt.com/privacy
+https://priteshvora1982.github.io/fixmyprompt/privacy.html
