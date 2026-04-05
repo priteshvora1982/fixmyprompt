@@ -134,59 +134,86 @@
   </div>
 
   <h3>Prompt text</h3>
-  <p>When you use FixMyPrompt, your prompt text is sent to our backend API (hosted on Railway) in real-time to generate improved versions. <strong>This data is processed and immediately discarded. It is never written to a database, log file, or any persistent storage.</strong></p>
+  <p>When you trigger the improvement flow, your prompt text is transmitted to our backend API over an encrypted HTTPS connection solely to generate an improved version. This is the only data that leaves your device. It is processed in real-time and immediately discarded — it is never written to a database, log file, or any persistent storage.</p>
 
   <h3>Domain classification</h3>
-  <p>Your prompt is classified into one of 8 categories (e.g. "technical", "creative_writing") to generate relevant questions. This classification happens on your device and is never sent to us independently.</p>
+  <p>Your prompt is classified into one of 8 categories (e.g. "technical", "creative_writing") to generate contextually relevant questions. This classification is performed entirely on your device and is never transmitted to our servers.</p>
 
-  <h3>Session state</h3>
-  <p>The extension stores minimal state in your browser's local storage — specifically, whether the improvement balloon has already been shown in the current conversation. This data never leaves your device.</p>
+  <h3>Browser local storage (on-device only)</h3>
+  <p>The extension writes a small amount of state to your browser's local storage — specifically, whether the improvement balloon has already been shown in the current conversation, and the current conversation ID. This data never leaves your device and is automatically cleared when you start a new conversation.</p>
 
-  <h2>3. What Data We Do NOT Collect</h2>
+  <h2>3. How Data Is Handled</h2>
+  <p>When you click "Improve" or answer questions in the FixMyPrompt flow, the following steps occur:</p>
+  <ol style="padding-left:24px; margin-bottom:16px;">
+    <li style="margin-bottom:8px; color:var(--text-mid);">Your prompt text is sent to our backend API server via an encrypted HTTPS request.</li>
+    <li style="margin-bottom:8px; color:var(--text-mid);">The server forwards the prompt to the OpenAI API (GPT-4) to generate an improved version or clarifying questions.</li>
+    <li style="margin-bottom:8px; color:var(--text-mid);">The improved prompt is returned to your browser and displayed in the extension UI.</li>
+    <li style="margin-bottom:8px; color:var(--text-mid);">Your original prompt is immediately discarded from our server's memory — it is never written anywhere.</li>
+  </ol>
+  <p>Our server is entirely stateless. It holds no user accounts, assigns no user IDs, and has no mechanism to associate any request with a specific person.</p>
+
+  <h2>4. Data Storage</h2>
+
+  <h3>Our backend server</h3>
+  <p><strong>Retention period: zero.</strong> Prompt text is held in server memory only for the duration of a single API request (typically under 5 seconds) and is discarded immediately after the response is sent. No prompt data is written to disk, a database, or any external storage system.</p>
+
+  <h3>Browser local storage</h3>
+  <p><strong>Retention period: session-scoped.</strong> The extension stores only a conversation state flag and conversation ID in your browser's local storage. This data remains on your device, is never transmitted, and is cleared automatically when you begin a new conversation.</p>
+
+  <h3>Server infrastructure logs (Railway)</h3>
+  <p>Our hosting provider (Railway) retains standard infrastructure logs — IP addresses, request timestamps, and HTTP response codes — for operational and security purposes. These logs do not contain prompt content and are retained according to <a href="https://railway.app/legal/privacy" target="_blank">Railway's privacy policy</a>.</p>
+
+  <h2>5. Data Security</h2>
+  <p>We take the following measures to protect any data that passes through our systems:</p>
   <ul>
-    <li>We do <strong>not</strong> collect your name, email, or any account information</li>
-    <li>We do <strong>not</strong> store your prompts or AI conversation history</li>
-    <li>We do <strong>not</strong> track which websites you visit (outside of detecting chatgpt.com and claude.ai)</li>
-    <li>We do <strong>not</strong> use cookies for tracking</li>
-    <li>We do <strong>not</strong> collect IP addresses in a personally identifiable way</li>
-    <li>We do <strong>not</strong> sell data to third parties — ever</li>
-    <li>We do <strong>not</strong> use your data for advertising</li>
-    <li>We do <strong>not</strong> use analytics services that track individual users</li>
+    <li><strong>Encryption in transit:</strong> All communication between the extension and our backend API uses HTTPS (TLS encryption). Data is never transmitted over unencrypted connections.</li>
+    <li><strong>No persistent storage:</strong> Prompt text is never written to disk or a database, eliminating the risk of data breach from stored records.</li>
+    <li><strong>Stateless architecture:</strong> Our server does not maintain session state or user profiles, meaning there is no accumulated user data that could be exposed.</li>
+    <li><strong>No authentication tokens:</strong> The extension requires no login and stores no credentials, so there are no authentication secrets to compromise.</li>
   </ul>
 
-  <h2>4. How Your Prompt is Processed</h2>
-  <p>When you click "Improve" or answer questions in the FixMyPrompt balloon, your prompt text is sent to our backend server via an encrypted HTTPS request. Here's what happens:</p>
-  <ol style="padding-left:24px; margin-bottom:16px;">
-    <li style="margin-bottom:8px; color:var(--text-mid);">Your prompt is received by our API server.</li>
-    <li style="margin-bottom:8px; color:var(--text-mid);">It is passed to the OpenAI API (GPT-4) to generate improved text or clarifying questions.</li>
-    <li style="margin-bottom:8px; color:var(--text-mid);">The improved prompt is returned to your browser.</li>
-    <li style="margin-bottom:8px; color:var(--text-mid);">Your original prompt is immediately discarded from our server — it is not stored anywhere.</li>
-  </ol>
-  <p>Our server processes requests statelessly. There are no user accounts, no user IDs, and no way to associate a request with a specific person.</p>
+  <h2>6. Data Sharing</h2>
+  <p>We do not sell, rent, or trade your data. The only third parties that receive any data are:</p>
 
-  <h2>5. Third-Party Services</h2>
-  <h3>OpenAI API</h3>
-  <p>We use the OpenAI API to generate improved prompts and clarifying questions. Your prompt text is shared with OpenAI as part of this process. OpenAI's use of data submitted via their API is governed by <a href="https://openai.com/policies/api-data-usage-policies" target="_blank">OpenAI's API data usage policies</a>. As of 2024, OpenAI does not use API inputs/outputs to train models by default.</p>
+  <h3>OpenAI (prompt processing)</h3>
+  <p>Your prompt text is shared with the OpenAI API for the sole purpose of generating an improved prompt — this is the core function of the extension. It is not shared for advertising, profiling, or any purpose unrelated to generating your improvement. OpenAI's handling of API data is governed by their <a href="https://openai.com/policies/api-data-usage-policies" target="_blank">API data usage policies</a>. OpenAI does not use API inputs to train models by default.</p>
 
-  <h3>Railway (Hosting)</h3>
-  <p>Our backend API is hosted on Railway. Railway may retain standard server access logs (IP addresses, timestamps, request sizes) for operational purposes. These logs are used for debugging and security only and are not associated with your identity or prompt content.</p>
+  <h3>Railway (infrastructure)</h3>
+  <p>Our API is hosted on Railway's infrastructure. Railway receives standard server request metadata (IP address, timestamp, request size) as part of normal hosting operations. Railway does not receive prompt content. See <a href="https://railway.app/legal/privacy" target="_blank">Railway's privacy policy</a>.</p>
 
-  <h2>6. Children's Privacy</h2>
+  <p>No other third parties receive any data from FixMyPrompt.</p>
+
+  <h2>7. What We Do NOT Collect</h2>
+  <ul>
+    <li>We do <strong>not</strong> collect your name, email address, or any account information</li>
+    <li>We do <strong>not</strong> store your prompts or AI conversation history</li>
+    <li>We do <strong>not</strong> track which websites you visit (beyond detecting chatgpt.com and claude.ai to activate the extension)</li>
+    <li>We do <strong>not</strong> use cookies for tracking or analytics</li>
+    <li>We do <strong>not</strong> collect IP addresses in a personally identifiable way</li>
+    <li>We do <strong>not</strong> sell or transfer data to third parties for any purpose other than core functionality</li>
+    <li>We do <strong>not</strong> use your data for advertising or user profiling</li>
+    <li>We do <strong>not</strong> use third-party analytics services that track individual users</li>
+    <li>We do <strong>not</strong> collect financial, health, or communications data of any kind</li>
+  </ul>
+
+  <h2>8. Children's Privacy</h2>
   <p>FixMyPrompt is not directed at children under 13 years of age. We do not knowingly collect any information from children under 13. If you believe a child under 13 has used the extension, please contact us and we will take appropriate action.</p>
 
-  <h2>7. Changes to This Policy</h2>
+  <h2>9. Your Rights</h2>
+  <p>Because we do not collect or store personal data, there is no personal data to access, correct, or delete. If you have questions about this, please contact us at <a href="mailto:support@fixmyprompt.com">support@fixmyprompt.com</a>.</p>
+
+  <h2>10. Changes to This Policy</h2>
   <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this policy periodically. Continued use of the extension after changes constitutes your acceptance of the updated policy.</p>
 
-  <h2>8. Your Rights</h2>
-  <p>Because we do not collect or store personal data, there is no personal data to access, correct, or delete. If you have questions about this, please contact us.</p>
-
-  <h2>9. Contact</h2>
-  <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please reach out via our support page.</p>
+  <h2>11. Contact</h2>
+  <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
+  <p><strong>Email:</strong> <a href="mailto:support@fixmyprompt.com">support@fixmyprompt.com</a></p>
+  <p><strong>Support page:</strong> <a href="support.html">fixmyprompt support</a></p>
 
   <div class="contact-box">
     <h3>Questions about privacy?</h3>
-    <p>We're happy to answer anything. Reach out via our support page.</p>
-    <a href="support.html">Visit Support Page</a>
+    <p>We're happy to answer anything. Email us or visit the support page.</p>
+    <a href="mailto:support@fixmyprompt.com">✉️ support@fixmyprompt.com</a>
   </div>
 
 </div>
