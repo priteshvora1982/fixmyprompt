@@ -10,7 +10,8 @@
   "host_permissions": [
     "*://chatgpt.com/*",
     "*://chat.openai.com/*",
-    "*://claude.ai/*"
+    "*://claude.ai/*",
+    "https://web-production-b82f2.up.railway.app/*"
   ],
   "background": {
     "service_worker": "service-worker.js"

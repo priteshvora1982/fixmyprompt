@@ -40,16 +40,32 @@ Used to store lightweight session state within the browser. This allows the exte
 ### Host Permissions: `chatgpt.com`, `chat.openai.com`, `claude.ai`
 
 **Why they're needed:**
-The extension only operates on these three domains — the two URLs for ChatGPT and the URL for Claude. Host permissions are required to allow the content script to run on these pages and to allow the extension to make API calls from within these pages to the FixMyPrompt backend.
+The extension only operates on these three domains — the two URLs for ChatGPT and the URL for Claude. Host permissions are required to allow the content script to run on these pages.
 
 **Specific use:**
 - Content script runs only on these domains
-- API calls to `web-production-b82f2.up.railway.app` (FixMyPrompt backend) are made from within these pages to generate improved prompts
+- Reads the prompt text typed by the user in the chat input box
+- Injects the FixMyPrompt balloon and button UI into the page
 
 **What it does NOT do:**
-- Does not request access to any other domain
-- Does not inject any code into any other website
-- Does not track user behavior on these platforms beyond reading the prompt input field
+- Does not read any page content other than the AI prompt input field
+- Does not track user behaviour on these platforms
+
+---
+
+### Host Permission: `https://web-production-b82f2.up.railway.app/*`
+
+**Why it's needed:**
+This is the URL of the FixMyPrompt backend API (hosted on Railway). When the user triggers a prompt improvement, the content script sends the prompt text to this endpoint via an encrypted HTTPS request. Without this host permission, the cross-origin fetch from the content script would be blocked by Chrome.
+
+**Specific use:**
+- `POST /api/questions` — generates clarifying questions for the prompt
+- `POST /api/improve` — rewrites the prompt using the user's answers
+- All requests are over HTTPS and prompt data is immediately discarded after processing
+
+**What it does NOT do:**
+- Does not send any data to this endpoint without explicit user action (clicking Improve)
+- Does not transmit any personal information — only the prompt text
 
 ---
 
