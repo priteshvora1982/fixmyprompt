@@ -133,7 +133,7 @@ Chrome requires you to declare data usage. Answer as follows:
 
 - [ ] Share the Chrome Web Store link on Product Hunt
 - [ ] Submit to extension directories (e.g. extensionworkshop.com roundups)
-- [ ] Monitor `priteshvora1982@gmail.com` for support enquiries
+- [ ] Monitor `pvmstack@gmail.com` for support enquiries
 - [ ] Web pages are live at https://priteshvora1982.github.io/fixmyprompt/
 - [ ] Monitor the Developer Dashboard for user reviews and respond promptly
 
