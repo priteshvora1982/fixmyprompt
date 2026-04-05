@@ -33,16 +33,16 @@ No account required. No sign-up. Completely free.
 
 ## Website
 
-- **Homepage:** [fixmyprompt.com](https://fixmyprompt.com)
-- **Support:** [fixmyprompt.com/support.html](https://fixmyprompt.com/support.html)
-- **Privacy Policy:** [fixmyprompt.com/privacy.html](https://fixmyprompt.com/privacy.html)
+- **Homepage:** [priteshvora1982.github.io/fixmyprompt](https://priteshvora1982.github.io/fixmyprompt/)
+- **Support:** [priteshvora1982.github.io/fixmyprompt/support.html](https://priteshvora1982.github.io/fixmyprompt/support.html)
+- **Privacy Policy:** [priteshvora1982.github.io/fixmyprompt/privacy.html](https://priteshvora1982.github.io/fixmyprompt/privacy.html)
 
 ---
 
 ## Repository structure
 
 ```
-├── index.html          # Landing page (GitHub Pages / fixmyprompt.com)
+├── index.html          # Landing page (GitHub Pages)
 ├── privacy.html        # Privacy policy
 ├── support.html        # Support & FAQ
 ├── src/                # Extension source code

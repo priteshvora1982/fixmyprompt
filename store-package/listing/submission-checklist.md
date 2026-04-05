@@ -133,8 +133,8 @@ Chrome requires you to declare data usage. Answer as follows:
 
 - [ ] Share the Chrome Web Store link on Product Hunt
 - [ ] Submit to extension directories (e.g. extensionworkshop.com roundups)
-- [ ] Set up `support@fixmyprompt.com` email to receive support enquiries
-- [ ] Host web pages at fixmyprompt.com (deploy `store-package/web-pages/`)
+- [ ] Monitor `priteshvora1982@gmail.com` for support enquiries
+- [ ] Web pages are live at https://priteshvora1982.github.io/fixmyprompt/
 - [ ] Monitor the Developer Dashboard for user reviews and respond promptly
 
 ---
@@ -148,7 +148,7 @@ store-package/
 │   ├── permission-justifications.md  ← Use for Privacy Practices tab
 │   └── submission-checklist.md       ← This file
 ├── web-pages/
-│   ├── index.html                    ← Landing page (host at fixmyprompt.com)
+│   ├── index.html                    ← Landing page (hosted on GitHub Pages)
 │   ├── privacy.html                  ← Privacy policy (link in listing)
 │   └── support.html                  ← Support page (link in listing)
 ├── promotional/
