@@ -3,23 +3,6 @@
 
 ---
 
-### Permission: `activeTab`
-
-**Why it's needed:**
-FixMyPrompt needs to read the content of the active tab to detect which AI platform the user is on (ChatGPT or Claude) and to inject the improvement UI into that page.
-
-**Specific use:**
-- Detects whether the current tab is `chatgpt.com` or `claude.ai`
-- Reads the text the user has typed into the prompt input box
-- Injects the FixMyPrompt button and balloon UI into the page
-
-**What it does NOT do:**
-- Does not access any other tabs
-- Does not read any page content other than the AI prompt input field
-- Does not capture browsing history
-
----
-
 ### Permission: `storage`
 
 **Why it's needed:**
@@ -72,6 +55,7 @@ This is the URL of the FixMyPrompt backend API (hosted on Railway). When the use
 ### No other permissions are requested.
 
 FixMyPrompt deliberately avoids requesting permissions it does not need:
+- ❌ No `activeTab` permission (page access is granted via `host_permissions` + declarative `content_scripts`, not via user-gesture-triggered tab access)
 - ❌ No `scripting` permission (content script is injected declaratively via manifest `content_scripts`, not programmatically)
 - ❌ No `tabs` permission (does not enumerate or access other tabs)
 - ❌ No `history` permission
