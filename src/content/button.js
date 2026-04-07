@@ -18,8 +18,6 @@ import { questionGenerator } from "../shared/question-generator.js";
 import { extractRecentMessages } from "../shared/message-extractor.js";
 import { incrementalContextManager } from "../shared/incremental-context-v2.js";
 import { InputMonitor } from "./input-monitor.js";
-import { PromptAnalyzer } from "./prompt-analyzer.js";
-import { BackendAnalyzer } from "./backend-analyzer.js";
 import { GapFinder } from "../shared/gap-finder.js";
 import { PromptScorer } from "../shared/prompt-scorer.js";
 import { SuggestionFormatter } from "../shared/suggestion-formatter.js";
@@ -691,19 +689,6 @@ function setupTextareaListener(platform, inputElement) {
     // PHASE 3 v0.1.0: Initialize InputMonitor with 2.5s pause threshold (user needs time to finish thought)
     console.log('[FixMyPrompt] Initializing InputMonitor with 2.5s pause threshold');
     const inputMonitor = new InputMonitor(inputElement, { pauseThreshold: 2500 });
-    
-    // PHASE 3: Initialize hybrid analyzer (local + backend)
-    console.log('[FixMyPrompt] Initializing hybrid PromptAnalyzer');
-    const promptAnalyzer = new PromptAnalyzer({
-        backendConfig: {
-            apiEndpoint: '/api/v1/analyze-prompt',
-            timeout: 5000
-        },
-        minAnalysisInterval: 2000,
-        analysisTimeout: 5000,
-        enableDetailedLogging: true,
-        fallbackToLocal: true
-    });
     
     // PHASE 4: Initialize AutoDetectBalloon UI
     console.log('[FixMyPrompt] Initializing AutoDetectBalloon');
