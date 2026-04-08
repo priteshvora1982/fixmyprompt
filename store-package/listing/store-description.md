@@ -74,12 +74,12 @@ FixMyPrompt understands 8 domains and tailors its improvements accordingly:
 
 ---
 
-### What's new in v0.1.31
-- Fixed balloon not appearing on the first prompt only
+### What's new in v0.1.32
+- Removed unused code that was causing 404 errors on page load
+- Switched to faster, more efficient AI model
+- Fixed balloon only showing on first prompt of each conversation
 - Fixed score display (now consistent 0–10 scale)
 - Fixed platform detection for Claude users
-- Finance domain now correctly detected
-- Submitted prompts now properly tracked in session context
 
 ---
 
